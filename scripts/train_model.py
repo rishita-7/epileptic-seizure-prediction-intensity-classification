@@ -22,12 +22,10 @@ X2, y2 = process_file(
     preictal_duration=600
 )
 
-# Combine
 X = np.vstack((X1, X2))
 y = np.hstack((y1, y2))
 
 # ---- Train/Test Split ----
-
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
@@ -45,6 +43,10 @@ model.fit(X_train, y_train)
 
 # ---- Evaluation ----
 
-y_pred = model.predict(X_test)
+y_prob = model.predict_proba(X_test)[:, 1]
+
+threshold = 0.4  # try 0.3 first
+
+y_pred = (y_prob >= threshold).astype(int)
 
 print(classification_report(y_test, y_pred))
