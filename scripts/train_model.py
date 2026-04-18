@@ -40,7 +40,7 @@ X_test = scaler.transform(X_test)
 
 # ---- Model ----
 
-model = LogisticRegression(max_iter=1000)
+model = LogisticRegression(max_iter=1000, class_weight='balanced')
 model.fit(X_train, y_train)
 
 # ---- Evaluation ----
