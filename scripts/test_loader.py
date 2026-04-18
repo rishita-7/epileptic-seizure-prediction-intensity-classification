@@ -5,6 +5,8 @@ from src.preprocessing.referencing import apply_reference
 from src.preprocessing.channel_cleaning import clean_channels
 from src.preprocessing.segmentation import segment_signal
 from src.preprocessing.labeling import generate_labels
+from src.preprocessing.feature_extraction import extract_features
+
 file_name = "chb01_15.edf"   # change this when needed
 
 if __name__ == "__main__":
@@ -35,3 +37,7 @@ else:
 print("Segments:", segments.shape)
 print("Labels:", labels.shape)
 print("Pre-ictal count:", labels.sum())
+
+features = extract_features(segments, sfreq=256)
+
+print("Feature shape:", features.shape)
